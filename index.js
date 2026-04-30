@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./src/config/db.js')
-const authRoutes = require('./src/routes/authRoutes.js');
+const authRoutes = require('./src/routes/authRoutes');
 const swaggerUi = require('swagger-ui-express');
+const transactionRoutes = require('./src/routes/transactionRoutes');
+const walletRoutes = require('./src/routes/walletRoutes');
 
 let swaggerDocument={};
 try{
@@ -25,6 +27,8 @@ app.get("/", (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/transaction', transactionRoutes);
+app.use('/api/wallet', walletRoutes);
 
 app.listen(port, () =>{
     console.log('server running on port ${PORT}');
